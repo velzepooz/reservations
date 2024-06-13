@@ -1,9 +1,9 @@
 import * as process from 'node:process';
 import { DataSource } from 'typeorm';
 import * as dotenv from 'dotenv';
-import { Reservation } from '../reservation/reservation.entity';
-import { User } from '../user/user.entity';
-import { Amenity } from '../amenity/amenity.entity';
+import { Reservation } from '../modules/reservation/reservation.entity';
+import { User } from '../modules/user/user.entity';
+import { Amenity } from '../modules/amenity/amenity.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 dotenv.config();

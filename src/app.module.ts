@@ -5,6 +5,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ReservationModule } from './modules/reservation/reservation.module';
+import { AmenityModule } from './modules/amenity/amenity.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -12,6 +15,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       load: [ServerConfig],
     }),
     TypeOrmModule.forRoot(DataBaseConfig),
+    ReservationModule,
+    AmenityModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
