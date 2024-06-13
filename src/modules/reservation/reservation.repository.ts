@@ -17,11 +17,18 @@ export class ReservationRepository extends Repository<Reservation> {
     amenityId: number,
     reservationDate: number,
   ): Promise<IReservation[]> {
-    return this._repository.find({
-      where: {
-        amenityId: amenityId,
-        date: reservationDate,
-      },
-    });
+    return this._repository.query(
+      `SELECT
+           r.id,
+           r."userId",
+           a.name,
+           to_char(MAKE_INTERVAL(mins => r."startTime"), 'HH24:MI') AS "startTime",
+           (r."endTime" - r."startTime") AS "durationMinutes"
+       FROM reservation as r
+                LEFT JOIN "amenity" as a ON r."amenityId" = a.id
+       WHERE r."amenityId" = $1 AND r."date" = $2
+       ORDER BY r."startTime" ASC;`,
+      [amenityId, reservationDate],
+    );
   }
 }
