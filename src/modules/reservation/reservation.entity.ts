@@ -36,9 +36,11 @@ export class Reservation {
   @Column({ type: 'bigint', nullable: false })
   date: number;
 
-  @ManyToOne(() => User, (user) => user.reservations)
+  @ManyToOne(() => User, (user) => user.reservations, { onDelete: 'CASCADE' })
   user: User;
 
-  @ManyToOne(() => Amenity, (amenity) => amenity.reservations)
+  @ManyToOne(() => Amenity, (amenity) => amenity.reservations, {
+    onDelete: 'CASCADE',
+  })
   amenity: Amenity;
 }
