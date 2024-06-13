@@ -11,7 +11,7 @@ export class GetByAmenityQueryDto {
   @IsPositive()
   @IsNumber()
   @Transform(({ value }) => Number(value))
-  id: number;
+  amenityId: number;
 
   @ApiProperty({
     description: 'Timestamp of reservation date',
