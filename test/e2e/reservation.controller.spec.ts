@@ -34,8 +34,7 @@ describe('On /reservations', () => {
   });
 
   describe('GET /amenity/:amenityId/:reservationDate', () => {
-    let reservations: IReservation[],
-      currentAmenity: IAmenity,
+    let currentAmenity: IAmenity,
       currentTimestamp: number,
       reservationsOfCurrentAmenityCount: number;
 
@@ -54,7 +53,7 @@ describe('On /reservations', () => {
           }),
         );
       }
-      reservations = await Promise.all(reservationPromises);
+      await Promise.all(reservationPromises);
     });
 
     it('Should return 200 OK and the reservations of the current amenity', async () => {
@@ -104,7 +103,7 @@ describe('On /reservations', () => {
         .expect(HttpStatus.BAD_REQUEST);
     });
 
-    it('Should return 400 error if invalid amenityId is provided', async () => {
+    it('Should return 400 error if invalid reservationDate is provided', async () => {
       await request(httpServer)
         .get(
           `${RESERVATION_HTTP_ROUTES.MAIN}${RESERVATION_HTTP_ROUTES.GET_BY_AMENITY}/${currentAmenity.id}/${Faker.string()}`,
