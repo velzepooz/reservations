@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import ServerConfig from './config/server.config';
 import { DataBaseConfig } from './config/database.config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReservationModule } from './modules/reservation/reservation.module';
@@ -19,7 +17,7 @@ import { UserModule } from './modules/user/user.module';
     AmenityModule,
     UserModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
