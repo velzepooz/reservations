@@ -12,10 +12,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<FastifyReply>();
     const status = exception.getStatus();
+    const errorResponse = exception.getResponse() as { message: string[] };
 
     response.status(status).send({
       statusCode: status,
-      message: exception.message,
+      message: Array.isArray(errorResponse.message)
+        ? errorResponse.message
+        : [errorResponse.message],
     });
   }
 }
