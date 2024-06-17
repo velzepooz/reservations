@@ -2,7 +2,10 @@ import { Repository } from 'typeorm';
 import { Reservation } from './reservation.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IReservation } from './types/reservation-repository.types';
+import {
+  AmenityReservation,
+  UserReservation,
+} from './types/reservation-repository.types';
 
 @Injectable()
 export class ReservationRepository extends Repository<Reservation> {
@@ -16,7 +19,7 @@ export class ReservationRepository extends Repository<Reservation> {
   async findByAmenityIdAndReservationDate(
     amenityId: number,
     reservationDate: number,
-  ): Promise<IReservation[]> {
+  ): Promise<AmenityReservation[]> {
     return this._repository.query(
       `SELECT
            r.id,
@@ -29,6 +32,20 @@ export class ReservationRepository extends Repository<Reservation> {
        WHERE r."amenityId" = $1 AND r."date" = $2
        ORDER BY r."startTime" ASC;`,
       [amenityId, reservationDate],
+    );
+  }
+
+  async findByUserIdAndGroupByDate(userId: number): Promise<UserReservation[]> {
+    return this._repository.query(
+      `
+      SELECT
+          TO_CHAR(TO_TIMESTAMP("date" / 1000), 'YYYY-MM-DD') AS date,
+          json_agg(row_to_json(reservation)) AS reservations
+      FROM reservation
+      WHERE "userId" = $1
+      GROUP BY date;
+    `,
+      [userId],
     );
   }
 }

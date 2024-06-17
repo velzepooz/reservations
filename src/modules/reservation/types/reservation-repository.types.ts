@@ -11,3 +11,16 @@ export type IReservation = {
   user?: User;
   amenity?: Amenity;
 };
+
+export type AmenityReservation = {
+  id: number;
+  name: string;
+  startTime: string;
+  duration: number;
+  userId: number;
+};
+
+export type UserReservation = {
+  date: string;
+  reservations: IReservation[];
+};
