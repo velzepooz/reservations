@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReservationModule } from './modules/reservation/reservation.module';
 import { AmenityModule } from './modules/amenity/amenity.module';
 import { UserModule } from './modules/user/user.module';
+import { CsvParserModule } from './modules/csv-parser/csv-parser.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UserModule } from './modules/user/user.module';
     ReservationModule,
     AmenityModule,
     UserModule,
+    CsvParserModule,
   ],
   controllers: [],
   providers: [],

@@ -7,6 +7,7 @@ import {
 } from '@nestjs/platform-fastify';
 import { addExceptionFilter } from '../../src/app/utils/exception-filter.util';
 import { TestUtils } from './test.util';
+import { addMultipart } from '../../src/app/utils/multipart.util';
 
 class TestAppModuleClass {
   app: NestFastifyApplication;
@@ -21,6 +22,7 @@ class TestAppModuleClass {
       new FastifyAdapter(),
     );
     addExceptionFilter(this.app);
+    await addMultipart(this.app);
     await this.app.init();
     await this.app.getHttpAdapter().getInstance().ready();
   }

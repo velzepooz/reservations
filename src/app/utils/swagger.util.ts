@@ -1,7 +1,7 @@
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
 
-export const addSwagger = (app: NestFastifyApplication) => {
+export const addSwagger = (app: NestFastifyApplication): void => {
   const config = new DocumentBuilder()
     .setTitle('Reservations API')
     .setDescription('REST API for reservations')

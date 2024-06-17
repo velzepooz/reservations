@@ -7,6 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { addSwagger } from './app/utils/swagger.util';
 import { addExceptionFilter } from './app/utils/exception-filter.util';
+import { addMultipart } from './app/utils/multipart.util';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -16,6 +17,7 @@ async function bootstrap() {
   const config = app.get<ConfigService>(ConfigService);
   addSwagger(app);
   addExceptionFilter(app);
+  await addMultipart(app);
 
   await app.listen(
     config.get<string>('server.port'),
