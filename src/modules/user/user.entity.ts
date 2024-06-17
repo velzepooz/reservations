@@ -7,7 +7,7 @@ export class User {
   id: number;
 
   @Column({ nullable: false })
-  email: string;
+  username: string;
 
   @OneToMany(() => Reservation, (reservation) => reservation.user)
   reservations: Reservation[];
