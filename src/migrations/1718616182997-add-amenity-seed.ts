@@ -11,6 +11,10 @@ export class AddAmenitySeed1718616182997 implements MigrationInterface {
         [amenity.Id, amenity.Name],
       );
     }
+
+    await queryRunner.query(
+      `SELECT setval('amenity_id_seq', (SELECT MAX(id) FROM amenity)) `,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {}

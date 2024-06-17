@@ -11,6 +11,10 @@ export class AddUserSeed1718617592304 implements MigrationInterface {
         [user.Id, user.Username],
       );
     }
+
+    await queryRunner.query(
+      `SELECT setval('user_id_seq', (SELECT MAX(id) FROM "user")) `,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {}

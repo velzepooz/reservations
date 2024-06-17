@@ -20,6 +20,10 @@ export class AddReservationSeed1718617735056 implements MigrationInterface {
         ],
       );
     }
+
+    await queryRunner.query(
+      `SELECT setval('reservation_id_seq', (SELECT MAX(id) FROM reservation)) `,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {}

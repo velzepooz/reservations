@@ -38,7 +38,7 @@ describe('On /csv-parser', () => {
         .set('Content-Type', 'multipart/form-data')
         .expect(HttpStatus.BAD_REQUEST);
 
-      expect(response.body.message).toEqual('Unexpected field');
+      expect(response.body.message[0]).toEqual('Unexpected field');
     });
 
     it('Should return 400 BAD_REQUEST if invalid file provided', async () => {
@@ -50,7 +50,7 @@ describe('On /csv-parser', () => {
         .set('Content-Type', 'multipart/form-data')
         .expect(HttpStatus.BAD_REQUEST);
 
-      expect(response.body.message).toEqual('Invalid file type');
+      expect(response.body.message[0]).toEqual('Invalid file type');
     });
   });
 });
