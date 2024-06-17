@@ -109,3 +109,7 @@ npm run typeorm:migration:run
 ```bash
 npm run test
 ```
+
+## Seeding
+
+Seed files are located in the `data` directory. Database is automatically seeded with the data from the seed files during migrations.
