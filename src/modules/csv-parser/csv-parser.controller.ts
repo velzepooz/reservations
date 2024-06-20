@@ -3,6 +3,7 @@ import {
   HttpStatus,
   Post,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { CsvParserService } from './csv-parser.service';
@@ -11,6 +12,7 @@ import { IUploadedFile } from './types/csv-parser.types';
 import { FileFastifyInterceptor } from 'fastify-file-interceptor';
 import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FileUploadDto } from './dto/in/file-upload.dto';
+import { AuthGuard } from '../auth/guards/auth.guard';
 
 @ApiTags('Parse csv files')
 @Controller('csv-parser')
@@ -26,6 +28,7 @@ export class CsvParserController {
     status: HttpStatus.CREATED,
     description: 'Csv file content parsed to JSON',
   })
+  @UseGuards(AuthGuard)
   @Post('/json')
   @UseInterceptors(
     FileFastifyInterceptor('file', { fileFilter: csvFileValidation }),

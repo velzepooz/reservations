@@ -19,9 +19,18 @@ export class Faker {
     return chance.hash({ length });
   }
 
+  static username(): string {
+    return chance.string({
+      length: 10,
+      alpha: true,
+      numeric: false,
+      symbols: false,
+    });
+  }
+
   static password(length = 10): string {
     return (
-      'a1' +
+      'a1@' +
       chance.string({
         length,
         alpha: true,
