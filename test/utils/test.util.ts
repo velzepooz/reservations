@@ -1,12 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource } from 'typeorm/data-source/DataSource';
+import { IUser } from '../../src/modules/user/types/user-repository.types';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class TestUtils {
   /**
    * Creates an instance of TestUtils
    */
-  constructor(private readonly dataSource: DataSource) {
+  constructor(
+    private readonly dataSource: DataSource,
+    private readonly jwtService: JwtService,
+  ) {
     if (process.env.NODE_ENV !== 'test') {
       throw new Error('ERROR-TEST-UTILS-ONLY-FOR-TESTS');
     }
@@ -34,5 +39,9 @@ export class TestUtils {
     } catch (error) {
       throw new Error(`ERROR: Cleaning test db: ${error}`);
     }
+  }
+
+  async generateJwt(userData: IUser): Promise<string> {
+    return this.jwtService.signAsync(userData);
   }
 }
